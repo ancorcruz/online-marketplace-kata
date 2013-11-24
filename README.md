@@ -18,7 +18,7 @@ The interface to our checkout looks like this (shown in Ruby):
 
 ```ruby
 co = Checkout.new(promotional_rules) co.scan(item)
- co.scan(item)
+co.scan(item)
 price = co.total
 ```
 
