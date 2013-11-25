@@ -9,8 +9,8 @@ class CheckoutTest < Test::Unit::TestCase
   end
 
   def total_price_for(items = [])
-    promotorional_rules = nil
-    co = Checkout.new(promotorional_rules)
+    promotional_rules = nil
+    co = Checkout.new(promotional_rules)
     items.each { |item| co.scan item }
     co.total
   end
