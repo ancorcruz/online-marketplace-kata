@@ -9,8 +9,7 @@ class CheckoutTest < Test::Unit::TestCase
   end
 
   def total_price_for(items = [])
-    promotional_rules = nil
-    co = Checkout.new(promotional_rules)
+    co = Checkout.new(@promotional_rules)
     items.each { |item| co.scan item }
     co.total
   end
@@ -23,6 +22,10 @@ class CheckoutTest < Test::Unit::TestCase
   end
 
   def test_total_with_promotions
+    @promotional_rules = [
+      Promotion.new { |co| co.subtotal / 10 if co.subtotal >= 6000 },
+    ]
+
     assert_equal 0,     total_price_for([])
     assert_equal 66.78, total_price_for([@p1, @p2, @p3])
     assert_equal 36.95, total_price_for([@p1, @p3, @p1])

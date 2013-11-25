@@ -1,8 +1,9 @@
 require './product'
+require './promotion'
 
 class Checkout
-  def initialize promotional_rules
-    @promotional_rules = promotional_rules
+  def initialize(promotional_rules)
+    @promotional_rules = promotional_rules || []
     @items = []
   end
 
@@ -10,7 +11,15 @@ class Checkout
     @items << item
   end
 
+  def subtotal
+    @items.map(&:price_cents).reduce(:+) || 0
+  end
+
   def total
-    @items.inject(0) { |total, item| total += item.price_cents } / 100.0
+    total = @promotional_rules.inject(subtotal) { |total, rule|
+      total -= rule.get_discount_for(self)
+    }
+
+    total / 100.0
   end
 end
