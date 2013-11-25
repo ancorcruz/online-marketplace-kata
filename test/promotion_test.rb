@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.expand_path('../../promotion', __FILE__)
+require File.expand_path('../../lib/promotion', __FILE__)
 
 class PromotionTest < Test::Unit::TestCase
   def test_get_discount_for

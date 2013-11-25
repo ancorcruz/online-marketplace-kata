@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.expand_path('../../product', __FILE__)
+require File.expand_path('../../lib/product', __FILE__)
 
 class ProductTest < Test::Unit::TestCase
   def test_product_creation

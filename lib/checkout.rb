@@ -1,5 +1,5 @@
-require './product'
-require './promotion'
+require File.expand_path('../product', __FILE__)
+require File.expand_path('../promotion', __FILE__)
 
 class Checkout
   def initialize(promotional_rules)

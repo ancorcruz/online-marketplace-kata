@@ -1,5 +1,5 @@
 require 'test/unit'
-require File.expand_path('../../checkout', __FILE__)
+require File.expand_path('../../lib/checkout', __FILE__)
 
 class CheckoutTest < Test::Unit::TestCase
   def setup
