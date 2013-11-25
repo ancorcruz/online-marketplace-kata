@@ -23,12 +23,24 @@ class CheckoutTest < Test::Unit::TestCase
 
   def test_total_with_promotions
     @promotional_rules = [
-      Promotion.new { |co| co.subtotal / 10 if co.subtotal >= 6000 },
+      Promotion.new do |co|
+        amount = co.item_amount('001')
+        amount >= 2 ? amount * 75 : 0
+      end,
+
+      Promotion.new { |co, subtotal| subtotal / 10 if subtotal >= 6000 },
     ]
 
     assert_equal 0,     total_price_for([])
     assert_equal 66.78, total_price_for([@p1, @p2, @p3])
     assert_equal 36.95, total_price_for([@p1, @p3, @p1])
     assert_equal 73.76, total_price_for([@p1, @p2, @p1, @p3])
+  end
+
+  def test_item_amount
+    co = Checkout.new []
+    [@p1, @p2, @p3, @p2].each { |item| co.scan item }
+
+    assert_equal 2, co.item_amount(@p2.code)
   end
 end

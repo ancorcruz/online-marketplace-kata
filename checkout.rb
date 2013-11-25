@@ -11,13 +11,17 @@ class Checkout
     @items << item
   end
 
+  def item_amount product_code
+    @items.count { |item| item.code == product_code }
+  end
+
   def subtotal
     @items.map(&:price_cents).reduce(:+) || 0
   end
 
   def total
     total = @promotional_rules.inject(subtotal) { |total, rule|
-      total -= rule.get_discount_for(self)
+      total -= rule.get_discount_for(self, total)
     }
 
     total / 100.0

@@ -3,7 +3,7 @@ class Promotion
     @rule = rule
   end
 
-  def get_discount_for checkout
-    @rule.call(checkout) || 0
+  def get_discount_for *args
+    @rule.call(*args) || 0
   end
 end
