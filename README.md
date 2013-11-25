@@ -1,3 +1,12 @@
+# Key design decisions:
+
+* Work with integers (cents) instead of float numbers to avoid price rounding issues.
+
+* Implement promotional rules on demand as a block (metaprogramming) to allow more flexibility to marketing team. It's open to a wide range of promotion implementations.
+
+
+# Problem to solve:
+
 notonthehighstreet.com is an online marketplace, here is a sample of some of the products available on our site:
 
 
